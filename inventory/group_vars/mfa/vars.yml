@@ -1,0 +1,5 @@
+---
+yubikey_config_login: true
+yubikey_sudo_and_pass: false
+yubikey_sshd_and_pass: true
+yubikey_sudo_chal_rsp: false

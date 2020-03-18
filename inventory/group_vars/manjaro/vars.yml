@@ -1,0 +1,4 @@
+---
+dotfiles_cargo_crates:
+  - cargo-cache
+  - cargo-update

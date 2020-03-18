@@ -1,0 +1,60 @@
+---
+- name: morethandotfiles
+  hosts: development
+  become: true
+  tasks:
+    - name: Run morethandotfiles role
+      include_role:
+        name: hurricanehrndz.morethandotfiles
+
+    - name: Install gotop via snap
+      snap:
+        name: gotop-cjbassi
+
+    - name: Alias gotop
+      command: snap alias gotop-cjbassi.gotop-cjbassi gotop
+      args:
+        creates: /snap/bin/gotop
+
+    - name: 'Install byobu'
+      package:
+        name: byobu
+
+    - name: Create byobu inital config
+      command: "byobu -c exit"
+      become: true
+      become_user: "{{ dotfiles_user }}"
+      args:
+        creates: "{{ dotfiles_user_home }}/.byobu"
+
+    - name: Enable true colors in byobu
+      # fix neovim true colors
+      blockinfile:
+        path: "{{ dotfiles_user_home }}/.byobu/.tmux.conf"
+        block: |
+          set -s default-terminal screen-256color
+          set -s terminal-overrides ''
+          set -as terminal-overrides ',*:Tc'
+        owner: "{{ dotfiles_user }}"
+
+    - name: '[Manjaro] Set bybou logo'
+      lineinfile:
+        path: "{{ dotfiles_user_home }}/.byobu/statusrc"
+        regex: '#LOGO=.*'
+        line: 'LOGO="$(color W g)  $(color -)"'
+      when: ansible_lsb.id == 'ManjaroLinux'
+
+    - name: '[Manjaro] Sync time with NTP'
+      command: timedatectl set-ntp true
+      args:
+        creates: /run/systemd/timesync/synchronized
+      when: ansible_lsb.id == 'ManjaroLinux'
+
+    - name: 'Enable gpg socket fowarding over ssh'
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regex: "StreamLocalBindUnlink.*"
+        line: "StreamLocalBindUnlink yes"
+        insertafter: "^UsePAM.*"
+        backup: yes
+        validate: /usr/sbin/sshd -T -f %s

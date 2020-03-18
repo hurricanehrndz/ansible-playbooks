@@ -1,0 +1,8 @@
+---
+- name: morethandotfiles
+  hosts: mfa
+  become: true
+  tasks:
+    - name: Run pam-yubikey role
+      include_role:
+        name: hurricanehrndz.pam_yubikey
