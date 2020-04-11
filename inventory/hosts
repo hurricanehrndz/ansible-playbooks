@@ -2,7 +2,7 @@
 all:
   hosts:
     manjaro-dev:
-    manjaro-T480:
+    manjaro-t480:
     ryzen-vmm01:
       ansible_host:
         ryzen-vmm01.home.techbyte.ca
@@ -11,16 +11,16 @@ all:
       hosts:
         ryzen-vmm01:
         manjaro-dev:
-        manjaro-T480:
+        manjaro-t480:
     headless:
       hosts:
         manjaro-dev:
     manjaro:
       hosts:
         manjaro-dev:
-        manjaro-T480:
+        manjaro-t480:
     mfa:
       hosts:
         ryzen-vmm01:
         manjaro-dev:
-        manjaro-T480:
+        manjaro-t480:
