@@ -2,6 +2,8 @@
 - name: morethandotfiles
   hosts: development
   become: true
+  vars:
+    nerdfonts_git_dest: /var/tmp/nerdfonts
   tasks:
     - name: Run morethandotfiles role
       include_role:
@@ -24,6 +26,7 @@
       command: "byobu -c exit"
       become: true
       become_user: "{{ dotfiles_user }}"
+      ignore_errors: yes
       args:
         creates: "{{ dotfiles_user_home }}/.byobu"
 
