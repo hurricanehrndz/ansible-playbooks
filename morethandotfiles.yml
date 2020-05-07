@@ -4,6 +4,7 @@
   become: true
   vars:
     nerdfonts_git_dest: /var/tmp/nerdfonts
+    dotfiles_python_ver: 3.8.2
   tasks:
     - name: Run morethandotfiles role
       include_role:
