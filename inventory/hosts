@@ -3,6 +3,7 @@ all:
   hosts:
     manjaro-dev:
     manjaro-t480:
+    hrndz-xps9370:
     ryzen-vmm01:
       ansible_host:
         ryzen-vmm01.home.techbyte.ca
@@ -12,6 +13,7 @@ all:
         ryzen-vmm01:
         manjaro-dev:
         manjaro-t480:
+        hrndz-xps9370:
     headless:
       hosts:
         manjaro-dev:
@@ -24,3 +26,4 @@ all:
         ryzen-vmm01:
         manjaro-dev:
         manjaro-t480:
+        hrndz-xps9370:
