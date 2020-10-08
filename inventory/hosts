@@ -1,29 +1,27 @@
 ---
 all:
   hosts:
-    manjaro-dev:
-    manjaro-t480:
-    hrndz-xps9370:
     ryzen-vmm01:
-      ansible_host:
-        ryzen-vmm01.home.techbyte.ca
+    ryzen-dev-vm01:
+    manjaro-dev:
+    hrndz-xps9370:
   children:
     development:
       hosts:
         ryzen-vmm01:
+        ryzen-dev-vm01:
         manjaro-dev:
-        manjaro-t480:
         hrndz-xps9370:
     headless:
       hosts:
+        ryzen-dev-vm01:
         manjaro-dev:
     manjaro:
       hosts:
         manjaro-dev:
-        manjaro-t480:
     mfa:
       hosts:
         ryzen-vmm01:
+        ryzen-dev-vm01:
         manjaro-dev:
-        manjaro-t480:
         hrndz-xps9370:
